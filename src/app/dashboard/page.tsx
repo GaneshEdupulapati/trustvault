@@ -1168,8 +1168,13 @@ export default function DashboardPage() {
     },
     {
       label: "Recent activity",
-      value: "Ã¢â‚¬â€",
-      note: "Audit events not connected",
+      value: String(auditLogs.length),
+      note:
+        auditLogs.length === 0
+          ? "No audit events recorded yet"
+          : auditLogs.length === 1
+            ? "Recorded security event"
+            : "Recorded security events",
       icon: History,
       tone: "cyan",
     },
