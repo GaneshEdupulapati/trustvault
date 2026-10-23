@@ -1,0 +1,20 @@
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+build/
+dist/
+.env
+.env.*
+!.env.example
+.vercel/
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+
+# Local backup files
+*.backup
+
+src/app/dashboard/page.backup.tsx

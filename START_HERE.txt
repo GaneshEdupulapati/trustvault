@@ -1,0 +1,31 @@
+TRUSTVAULT — START HERE (Windows / VS Code)
+
+IMPORTANT: This package is a fresh project folder. Do not copy individual files into your older project.
+
+1. Extract this ZIP to a new folder, for example:
+   C:\Users\YOUR_NAME\Downloads\trustvault-project
+2. Open that extracted folder in VS Code. It must be the folder containing package.json.
+3. Copy .env.example to a new file named .env.local (same folder as package.json).
+4. In .env.local, set your Supabase URL, publishable key, and a newly rotated Supabase secret key. Never share the secret key or put it in a NEXT_PUBLIC_ variable.
+5. In the Supabase Dashboard, open SQL Editor > New query. Copy all of supabase-migration.sql into the editor and Run it. If it reports an error, stop and inspect the error instead of repeatedly running it.
+6. In Supabase Auth URL Configuration, make sure http://localhost:3000 is allowed as a local redirect URL/site URL.
+7. Open VS Code terminal at the project root and run:
+      npm install
+      npm run dev
+8. Open http://localhost:3000
+
+TEST WORKFLOW (use test documents only):
+A. On the login page, click “Create an account”. Register account A with a name, email and password. Confirm the email if Supabase requires it, then sign in.
+B. On the dashboard, create an organization and copy its organization code.
+C. Sign out. Register a second account B using “Create an account”, confirm its email if required, and sign in.
+D. In the Organizations section, paste account A's organization code and click Join. Confirm the organization appears in the list.
+E. Sign in as account A. Select the organization before uploading a test PDF/image. Set a document password.
+F. Sign in as account B. Find the organization document and click Request access. Choose view or modify.
+G. Sign in as account A and approve the request. Copy the generated one-time access password and share it with account B using a separate channel.
+H. Sign in as account B and use Open securely with that access password. A document password/grant is still required; membership alone does not unlock a protected file.
+
+IMPORTANT NOTES:
+- Organization membership lets a user see document listings/metadata for that organization; it does not automatically grant permission to open protected documents. The owner must approve access and share the one-time access password.
+- The Storage bucket trustvault-documents must remain PRIVATE. Do not make it public.
+- Browser apps cannot guarantee screenshot prevention.
+- The project has not been validated with a successful full production build in this environment. Test the workflow using non-confidential sample files before submission.

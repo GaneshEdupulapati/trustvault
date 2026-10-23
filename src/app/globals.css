@@ -1,0 +1,868 @@
+@import "tailwindcss";
+
+/* =====================================================
+   TRUSTVAULT — FUTURISTIC NEON GLASS UI
+   Purple • Electric Blue • Neon Pink • Glassmorphism
+   ===================================================== */
+
+:root {
+  --background: #08051b;
+  --foreground: #f7edff;
+
+  --purple: #a100ff;
+  --purple-bright: #d629ff;
+  --pink: #ff39ef;
+  --blue: #287bff;
+  --cyan: #29eaff;
+
+  --glass: rgba(25, 13, 59, 0.72);
+  --glass-light: rgba(58, 30, 110, 0.45);
+
+  --border: rgba(204, 120, 255, 0.55);
+  --muted: #c5b4e7;
+
+  --neon-purple: 0 0 10px rgba(191, 49, 255, 0.75),
+    0 0 25px rgba(163, 36, 255, 0.5);
+
+  --neon-pink: 0 0 12px rgba(255, 42, 239, 0.85),
+    0 0 30px rgba(255, 42, 239, 0.45);
+
+  --neon-blue: 0 0 12px rgba(41, 139, 255, 0.8),
+    0 0 30px rgba(41, 139, 255, 0.4);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* =====================================================
+   GLOBAL RESET
+   ===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+
+  background:
+    radial-gradient(
+      ellipse at 10% 10%,
+      rgba(147, 19, 255, 0.23),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 90% 8%,
+      rgba(0, 108, 255, 0.26),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(136, 0, 255, 0.18),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #09051c 0%,
+      #11072b 45%,
+      #070c27 100%
+    );
+
+  background-attachment: fixed;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  color: white;
+  background: rgba(200, 39, 255, 0.65);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* =====================================================
+   AMBIENT BACKGROUND GLOW
+   ===================================================== */
+
+.trustvault-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(214, 41, 255, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(41, 234, 255, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(126, 35, 255, 0.18),
+      transparent 35%
+    );
+}
+
+.trustvault-background::before,
+.trustvault-background::after {
+  content: "";
+
+  position: absolute;
+  width: 550px;
+  height: 550px;
+
+  border-radius: 50%;
+  filter: blur(100px);
+
+  animation: ambient-float 12s ease-in-out infinite alternate;
+}
+
+.trustvault-background::before {
+  top: -200px;
+  left: -150px;
+  background: rgba(191, 28, 255, 0.15);
+}
+
+.trustvault-background::after {
+  right: -200px;
+  bottom: -200px;
+
+  background: rgba(0, 115, 255, 0.17);
+
+  animation-delay: -6s;
+}
+
+@keyframes ambient-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(50px, 30px, 0) scale(1.15);
+  }
+}
+
+/* =====================================================
+   MAIN NEON GLASS CARD
+   Add class: trustvault-card
+   ===================================================== */
+
+.trustvault-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  color: var(--foreground);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(64, 26, 105, 0.66),
+      rgba(15, 12, 48, 0.82) 48%,
+      rgba(16, 44, 91, 0.58)
+    );
+
+  border: 1px solid rgba(219, 159, 255, 0.58);
+  border-radius: 24px;
+
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(206, 100, 255, 0.16),
+    0 0 12px rgba(170, 43, 255, 0.18),
+    0 18px 55px rgba(0, 0, 0, 0.35);
+
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* Glass reflection */
+
+.trustvault-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  border-radius: inherit;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      130deg,
+      rgba(255, 255, 255, 0.13),
+      transparent 24%,
+      transparent 70%,
+      rgba(255, 255, 255, 0.04)
+    );
+
+  opacity: 0.85;
+}
+
+/* Cursor-following radial shine */
+
+.trustvault-card::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: radial-gradient(
+    280px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.27),
+    rgba(255, 57, 239, 0.15) 22%,
+    rgba(41, 234, 255, 0.09) 42%,
+    transparent 72%
+  );
+
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trustvault-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(255, 116, 255, 0.95);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 0 12px rgba(255, 57, 239, 0.55),
+      0 0 30px rgba(163, 36, 255, 0.28),
+      0 18px 55px rgba(0, 0, 0, 0.4);
+  }
+
+  .trustvault-card:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Keep actual content above the decorative glass layers */
+
+.trustvault-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* =====================================================
+   NEON BORDER VARIANTS
+   ===================================================== */
+
+.trustvault-neon-purple {
+  border: 1px solid rgba(210, 74, 255, 0.8);
+
+  box-shadow:
+    0 0 8px rgba(191, 49, 255, 0.4),
+    0 0 24px rgba(163, 36, 255, 0.16),
+    inset 0 0 12px rgba(191, 49, 255, 0.08);
+}
+
+.trustvault-neon-pink {
+  border: 1px solid rgba(255, 57, 239, 0.85);
+
+  box-shadow:
+    0 0 10px rgba(255, 57, 239, 0.45),
+    0 0 28px rgba(255, 57, 239, 0.18),
+    inset 0 0 12px rgba(255, 57, 239, 0.08);
+}
+
+.trustvault-neon-blue {
+  border: 1px solid rgba(41, 139, 255, 0.85);
+
+  box-shadow:
+    0 0 10px rgba(41, 139, 255, 0.45),
+    0 0 28px rgba(41, 139, 255, 0.18),
+    inset 0 0 12px rgba(41, 139, 255, 0.08);
+}
+
+/* =====================================================
+   CURSOR SHINE FOR OTHER PANELS
+   Add class: trustvault-shine
+   ===================================================== */
+
+.trustvault-shine {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.trustvault-shine::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: radial-gradient(
+    230px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 57, 239, 0.12) 32%,
+    transparent 72%
+  );
+
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trustvault-shine:hover::after {
+    opacity: 1;
+  }
+}
+
+.trustvault-shine > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* =====================================================
+   NEON GLASS BUTTONS
+   Add class: glass-button
+   ===================================================== */
+
+.glass-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 11px 19px;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(129, 32, 224, 0.8),
+      rgba(49, 39, 128, 0.72)
+    );
+
+  border: 1px solid rgba(218, 155, 255, 0.72);
+  border-radius: 14px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 0 10px rgba(169, 43, 255, 0.24);
+
+  transition:
+    transform 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+/* Moving light streak */
+
+.glass-button::after {
+  content: "";
+
+  position: absolute;
+  top: -60%;
+  left: -130%;
+
+  width: 65%;
+  height: 220%;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.78),
+    transparent
+  );
+
+  transform: rotate(18deg);
+
+  transition: left 650ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glass-button:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(255, 255, 255, 0.95);
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(172, 45, 255, 0.95),
+        rgba(56, 63, 170, 0.9)
+      );
+
+    box-shadow:
+      0 0 12px rgba(255, 57, 239, 0.5),
+      0 0 30px rgba(163, 36, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .glass-button:hover::after {
+    left: 150%;
+  }
+}
+
+.glass-button:active {
+  transform: scale(0.97);
+}
+
+/* Bright primary action */
+
+.glass-button-primary {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      115deg,
+      #c52cff,
+      #8a21ff 52%,
+      #4d62ff
+    );
+
+  border-color: rgba(255, 189, 255, 0.95);
+
+  box-shadow:
+    0 0 12px rgba(211, 45, 255, 0.62),
+    0 0 28px rgba(169, 43, 255, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.glass-button-primary:hover {
+  background:
+    linear-gradient(
+      115deg,
+      #e044ff,
+      #a52fff 52%,
+      #598aff
+    );
+
+  box-shadow:
+    0 0 16px rgba(255, 57, 239, 0.75),
+    0 0 36px rgba(169, 43, 255, 0.42);
+}
+
+/* Danger action */
+
+.glass-button-danger {
+  color: white;
+
+  background: rgba(115, 12, 72, 0.55);
+  border-color: rgba(255, 57, 146, 0.8);
+
+  box-shadow:
+    0 0 10px rgba(255, 35, 131, 0.3);
+}
+
+.glass-button-danger:hover {
+  background: rgba(170, 16, 91, 0.72);
+
+  box-shadow:
+    0 0 14px rgba(255, 35, 131, 0.65),
+    0 0 30px rgba(255, 35, 131, 0.25);
+}
+
+/* =====================================================
+   NEON GLASS INPUTS
+   ===================================================== */
+
+.glass-input {
+  width: 100%;
+  padding: 13px 15px;
+
+  color: #fff;
+
+  background: rgba(9, 7, 35, 0.7);
+
+  border: 1px solid rgba(157, 109, 229, 0.48);
+  border-radius: 13px;
+
+  outline: none;
+
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background 200ms ease;
+}
+
+.glass-input::placeholder {
+  color: #a99acb;
+}
+
+.glass-input:focus {
+  background: rgba(19, 10, 57, 0.88);
+
+  border-color: var(--pink);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 57, 239, 0.12),
+    0 0 14px rgba(255, 57, 239, 0.24);
+}
+
+/* =====================================================
+   SIDEBAR
+   ===================================================== */
+
+.trustvault-sidebar {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(48, 13, 82, 0.94),
+      rgba(16, 8, 43, 0.97)
+    );
+
+  border: 1px solid rgba(214, 117, 255, 0.6);
+  border-radius: 26px;
+
+  box-shadow:
+    0 0 12px rgba(187, 41, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.trustvault-nav-item {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 15px;
+
+  color: #d8c8f3;
+
+  border: 1px solid transparent;
+  border-radius: 13px;
+
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.trustvault-nav-item:hover {
+  color: white;
+
+  background: rgba(160, 48, 255, 0.18);
+
+  border-color: rgba(199, 103, 255, 0.4);
+
+  box-shadow:
+    0 0 14px rgba(169, 43, 255, 0.18);
+
+  transform: translateX(3px);
+}
+
+.trustvault-nav-item.active {
+  color: white;
+
+  background:
+    linear-gradient(
+      100deg,
+      rgba(200, 40, 255, 0.92),
+      rgba(108, 41, 226, 0.85)
+    );
+
+  border-color: rgba(255, 199, 255, 0.9);
+
+  box-shadow:
+    0 0 12px rgba(255, 57, 239, 0.65),
+    0 0 28px rgba(169, 43, 255, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* =====================================================
+   STAT CARDS
+   ===================================================== */
+
+.trustvault-stat {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(51, 26, 95, 0.8),
+      rgba(15, 15, 52, 0.88)
+    );
+
+  border: 1px solid rgba(195, 130, 255, 0.62);
+  border-radius: 20px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 14px rgba(169, 43, 255, 0.12);
+
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+.trustvault-stat:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(255, 83, 246, 0.95);
+
+  box-shadow:
+    0 0 14px rgba(255, 57, 239, 0.4),
+    0 0 28px rgba(169, 43, 255, 0.2);
+}
+
+/* =====================================================
+   STATUS BADGES
+   ===================================================== */
+
+.trustvault-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 5px 11px;
+
+  color: #e8dfff;
+
+  background: rgba(124, 64, 194, 0.2);
+
+  border: 1px solid rgba(189, 135, 255, 0.35);
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.trustvault-badge-success {
+  color: #6affc4;
+
+  background: rgba(0, 208, 139, 0.1);
+  border-color: rgba(0, 255, 170, 0.4);
+
+  box-shadow: 0 0 12px rgba(0, 255, 170, 0.08);
+}
+
+.trustvault-badge-warning {
+  color: #ffd66b;
+
+  background: rgba(255, 173, 40, 0.1);
+  border-color: rgba(255, 190, 50, 0.4);
+}
+
+.trustvault-badge-danger {
+  color: #ff7eb8;
+
+  background: rgba(255, 35, 131, 0.1);
+  border-color: rgba(255, 35, 131, 0.4);
+}
+
+/* =====================================================
+   DIVIDERS AND TEXT
+   ===================================================== */
+
+.trustvault-divider {
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 104, 255, 0.6),
+    rgba(41, 234, 255, 0.4),
+    transparent
+  );
+}
+
+.trustvault-muted {
+  color: var(--muted);
+}
+
+.trustvault-heading {
+  color: white;
+
+  text-shadow:
+    0 0 14px rgba(201, 104, 255, 0.18);
+}
+
+/* =====================================================
+   LOADING ANIMATION
+   ===================================================== */
+
+.trustvault-spinner {
+  width: 22px;
+  height: 22px;
+
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-top-color: var(--pink);
+  border-right-color: var(--cyan);
+
+  border-radius: 50%;
+
+  animation: trustvault-spin 750ms linear infinite;
+}
+
+@keyframes trustvault-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #7636b4 #100923;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #100923;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #c12cff,
+    #4a7dff
+  );
+
+  border: 2px solid #100923;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #f44aff,
+    #43dfff
+  );
+}
+
+/* =====================================================
+   RESPONSIVE HELPERS
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .trustvault-card {
+    border-radius: 18px;
+  }
+
+  .trustvault-sidebar {
+    border-radius: 18px;
+  }
+
+  .trustvault-stat {
+    border-radius: 16px;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .trustvault-card,
+  .trustvault-sidebar,
+  .trustvault-stat {
+    background: #17102f;
+  }
+
+  .glass-button {
+    background: #35105e;
+  }
+}
