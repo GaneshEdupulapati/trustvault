@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
@@ -630,7 +630,7 @@ export default function DashboardPage() {
           </head>
           <body>
             <header class="toolbar">
-              <div class="brand">TrustVault · Secure Viewer</div>
+              <div class="brand">TrustVault Â· Secure Viewer</div>
               <div>Time remaining: <span class="timer" id="trustvault-countdown">10:00</span></div>
             </header>
             <div class="warning">This viewing session will close when the countdown reaches zero.</div>
@@ -894,7 +894,7 @@ export default function DashboardPage() {
       const details = versions
         .map(
           (version) =>
-            `Version ${version.version_number} â€” ${version.original_filename}\\n` +
+            `Version ${version.version_number} Ã¢â‚¬â€ ${version.original_filename}\\n` +
             `${new Date(version.created_at).toLocaleString()}\\n` +
             `Note: ${version.change_note || "No change note"}`
         )
@@ -1168,7 +1168,7 @@ export default function DashboardPage() {
     },
     {
       label: "Recent activity",
-      value: "â€”",
+      value: "Ã¢â‚¬â€",
       note: "Audit events not connected",
       icon: History,
       tone: "cyan",
@@ -1239,7 +1239,7 @@ export default function DashboardPage() {
         <aside className="trustvault-card sticky top-5 hidden h-[calc(100vh-40px)] w-[218px] shrink-0 flex-col rounded-[26px] border border-fuchsia-300/40 bg-[#16082b]/80 p-4 shadow-[0_0_30px_rgba(190,50,255,.14)] backdrop-blur-2xl lg:flex">
           <div className="flex items-center gap-3 px-1 py-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-fuchsia-300/60 bg-fuchsia-500/20 text-fuchsia-100 shadow-[0_0_20px_rgba(217,70,255,.2)]">
-              <ShieldCheck size={23} />
+              <img src="/trustvault-logo.png" alt="GTrustVault logo" className="h-full w-full rounded-xl object-cover" />
             </div>
             <div>
               <p className="text-base font-black tracking-tight text-white">
@@ -1308,7 +1308,7 @@ export default function DashboardPage() {
           <header className="trustvault-card mb-5 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-fuchsia-300/40 bg-[#160c30]/75 px-5 py-4 shadow-[0_0_24px_rgba(190,50,255,.10)] backdrop-blur-2xl sm:px-7">
             <div className="flex items-center gap-3 lg:hidden">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-fuchsia-300/50 bg-fuchsia-500/15 text-fuchsia-200">
-                <ShieldCheck size={23} />
+                <img src="/trustvault-logo.png" alt="GTrustVault logo" className="h-full w-full rounded-xl object-cover" />
               </div>
               <div>
                 <p className="font-bold text-white">
@@ -1363,7 +1363,7 @@ export default function DashboardPage() {
                   <LogOut size={15} />
                 )}
                 <span className="hidden sm:inline">
-                  {signingOut ? "Signing outâ€¦" : "Sign out"}
+                  {signingOut ? "Signing outÃ¢â‚¬Â¦" : "Sign out"}
                 </span>
               </button>
             </div>
@@ -1564,7 +1564,7 @@ export default function DashboardPage() {
                 <label htmlFor="organization-name" className="mb-2 block text-xs font-semibold text-violet-100">Create an organization</label>
                 <div className="flex flex-col gap-2 sm:flex-row">
                   <input id="organization-name" value={organizationName} onChange={(e) => setOrganizationName(e.target.value)} maxLength={120} placeholder="e.g. Data Science Team" className="min-w-0 flex-1 rounded-xl border border-white/10 bg-[#08051b]/70 px-3 py-3 text-sm text-white outline-none placeholder:text-violet-400 focus:border-cyan-300/50" />
-                  <button type="button" disabled={organizationBusy} onClick={() => void submitOrganization("create")} className="glass-button glass-button-primary disabled:opacity-50">{organizationBusy ? "Workingâ€¦" : "Create"}</button>
+                  <button type="button" disabled={organizationBusy} onClick={() => void submitOrganization("create")} className="glass-button glass-button-primary disabled:opacity-50">{organizationBusy ? "WorkingÃ¢â‚¬Â¦" : "Create"}</button>
                 </div>
               </div>
               <div className="rounded-2xl border border-violet-300/20 bg-white/[0.03] p-4">
@@ -1617,7 +1617,7 @@ export default function DashboardPage() {
                     <div className="min-w-0 flex-1">
                       <p className="font-semibold text-white">{request.document_title}</p>
                       <p className="mt-1 text-xs text-violet-200">Requested by {request.requester_email}</p>
-                      <p className="mt-1 text-xs text-violet-300">{request.can_edit ? "Modify requested" : "View-only requested"}{request.can_download ? " Â· Download requested" : ""} Â· {formatTimestamp(request.created_at)}</p>
+                      <p className="mt-1 text-xs text-violet-300">{request.can_edit ? "Modify requested" : "View-only requested"}{request.can_download ? " Ã‚Â· Download requested" : ""} Ã‚Â· {formatTimestamp(request.created_at)}</p>
                     </div>
                     <button type="button" onClick={() => void handleAccessDecision(request.id, "approved")} className="glass-button glass-button-primary">Approve</button>
                     <button type="button" onClick={() => void handleAccessDecision(request.id, "denied")} className="glass-button border border-rose-400/40 text-rose-200">Deny</button>
@@ -1681,7 +1681,7 @@ export default function DashboardPage() {
                 ) : (
                   <UploadCloud size={16} />
                 )}
-                <span>{uploading ? "Uploadingâ€¦" : "Upload document"}</span>
+                <span>{uploading ? "UploadingÃ¢â‚¬Â¦" : "Upload document"}</span>
               </button>
 
               <input
@@ -1718,9 +1718,9 @@ export default function DashboardPage() {
                         {document.title}
                       </p>
                       <p className="mt-1 text-xs text-violet-300">
-                        {document.original_filename} Â·{" "}
+                        {document.original_filename} Ã‚Â·{" "}
                         {(document.file_size / (1024 * 1024)).toFixed(2)} MB
-                        {" Â· "}
+                        {" Ã‚Â· "}
                         {formatTimestamp(document.created_at)}
                       </p>
                       <p className="mt-2 inline-flex rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-2.5 py-1 text-[10px] text-cyan-100">
@@ -1911,7 +1911,7 @@ export default function DashboardPage() {
           </section>
 
           <footer className="flex flex-col gap-3 border-t border-violet-300/20 py-6 text-xs text-violet-300 sm:flex-row sm:items-center sm:justify-between">
-            <p>Â© 2026 TrustVault Â· Secure Document Sharing</p>
+            <p>Ã‚Â© 2026 TrustVault Ã‚Â· Secure Document Sharing</p>
             <p className="flex items-center gap-2">
               <CheckCircle2 size={15} className="text-emerald-300" />
               Role verified through Supabase
@@ -1922,3 +1922,4 @@ export default function DashboardPage() {
     </main>
   );
 }
+

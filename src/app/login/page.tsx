@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -88,7 +88,7 @@ export default function LoginPage() {
 
           <div className="relative flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-blue-300/30 bg-gradient-to-br from-blue-400/20 to-violet-500/10 shadow-[0_0_35px_rgba(59,130,246,0.15)]">
-              <FolderLock size={25} className="text-blue-300" />
+              <img src="/trustvault-logo.png" alt="GTrustVault logo" className="h-full w-full object-cover" />
             </div>
 
             <div>
@@ -199,7 +199,7 @@ export default function LoginPage() {
 
             <div className="mb-9 flex items-center gap-3 lg:hidden">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-300/30 bg-blue-400/10">
-                <FolderLock size={23} className="text-blue-300" />
+                <img src="/trustvault-logo.png" alt="GTrustVault logo" className="h-full w-full object-cover" />
               </div>
 
               <div>
@@ -377,7 +377,7 @@ export default function LoginPage() {
             </div>
 
             <p className="mt-8 text-center text-[10px] leading-5 text-slate-600">
-              TrustVault · Secure Document Sharing
+              TrustVault Â· Secure Document Sharing
               <br />
               Unauthorized access is not permitted.
             </p>
