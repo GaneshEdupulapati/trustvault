@@ -18,3 +18,9 @@ Thumbs.db
 *.backup
 
 src/app/dashboard/page.backup.tsx
+# Never upload environment files to GitHub
+
+.env
+.env.*
+.env.example
+**/.env.example

@@ -18,6 +18,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import GTVIntro from "@/components/GTVIntro";
 
 type PageMode = "login" | "signup" | "forgot";
 
@@ -177,6 +178,7 @@ export default function LoginPage() {
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#050816] px-4 py-10 text-white selection:bg-blue-400/30">
+      <GTVIntro />
       {/* Premium glass background */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_10%_10%,rgba(59,130,246,0.23),transparent_38%),radial-gradient(ellipse_at_90%_15%,rgba(139,92,246,0.20),transparent_36%),radial-gradient(ellipse_at_50%_100%,rgba(14,165,233,0.13),transparent_42%)]" />
 
